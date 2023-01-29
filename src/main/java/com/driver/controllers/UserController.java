@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserServiceImpl userService;
+
+
     @PostMapping("/register")
-    public ResponseEntity<Void> registerUser(@RequestParam String name, @RequestParam String phoneNumber, @RequestParam String password){
+    public ResponseEntity<Void> registerUser(@RequestParam("name") String name, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password){
         userService.register(name,phoneNumber,password);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<User> updatePassword(@RequestParam Integer userId, @RequestParam String password){
-        User updatedUser=userService.updatePassword(userId,password);
+    public ResponseEntity<User> updatePassword(@RequestParam("userId") Integer userId, @RequestParam("password") String password){
+        User updatedUser= userService.updatePassword(userId,password);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

@@ -1,12 +1,14 @@
 package com.driver.model;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "spot")
+@Table(name="spot")
 public class Spot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,28 +20,13 @@ public class Spot {
 
     private boolean occupied;
 
-    @ManyToOne
-    @JoinColumn
-    private ParkingLot parkingLot;
-
-    public Spot(int pricePerHour, boolean occupied) {
+    public Spot(int pricePerHour, SpotType spotType, boolean occupied) {
+        this.spotType = spotType;
         this.pricePerHour = pricePerHour;
         this.occupied = occupied;
     }
 
-    @OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
-    private List<Reservation> reservationList=new ArrayList<>();
-
-    public boolean isOccupied() {
-        return occupied;
-    }
-
-    public List<Reservation> getReservationList() {
-        return reservationList;
-    }
-
-    public void setReservationList(List<Reservation> reservationList) {
-        this.reservationList = reservationList;
+    public Spot() {
     }
 
     public int getId() {
@@ -78,16 +65,22 @@ public class Spot {
         return parkingLot;
     }
 
-    public Spot(int pricePerHour,SpotType spotType, boolean occupied) {
-        this.pricePerHour = pricePerHour;
-        this.spotType = spotType;
-        this.occupied = occupied;
-    }
-
     public void setParkingLot(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
 
-    public Spot() {
+    public List<Reservation> getReservationList() {
+        return reservationList;
     }
+
+    public void setReservationList(List<Reservation> reservationList) {
+        this.reservationList = reservationList;
+    }
+
+    @ManyToOne
+    @JoinColumn
+    private ParkingLot parkingLot;
+
+    @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL)
+    private List<Reservation> reservationList=new ArrayList<>();
 }

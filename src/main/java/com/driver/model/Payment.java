@@ -1,9 +1,10 @@
 package com.driver.model;
 
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "payment")
+@Table(name="payment")
 public class Payment {
 
     @Id
@@ -12,16 +13,12 @@ public class Payment {
 
     private boolean paymentCompleted;
 
-    @Enumerated(value=EnumType.STRING)
+    @Enumerated(value= EnumType.STRING)
     private PaymentMode paymentMode;
 
-    @OneToOne
-    @JoinColumn
-    private Reservation reservation;
-
-    public Payment(boolean paymentCompleted,PaymentMode paymentMode){
-        this.paymentCompleted=paymentCompleted;
-        this.paymentMode=paymentMode;
+    public Payment(boolean paymentCompleted, PaymentMode paymentMode) {
+        this.paymentCompleted = paymentCompleted;
+        this.paymentMode = paymentMode;
     }
 
     public Payment() {
@@ -58,4 +55,8 @@ public class Payment {
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
+
+    @OneToOne
+    @JoinColumn
+    private Reservation reservation;
 }

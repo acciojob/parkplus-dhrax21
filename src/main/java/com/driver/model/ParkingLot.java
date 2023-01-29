@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "parking_Lot")
+@Table(name="parking_Lot")
 public class ParkingLot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,8 +21,8 @@ public class ParkingLot {
         this.address = address;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "parking_Lot")
-    private List<Spot> spotList=new ArrayList<>();
+    public ParkingLot() {
+    }
 
     public int getId() {
         return id;
@@ -55,6 +56,7 @@ public class ParkingLot {
         this.spotList = spotList;
     }
 
-    public ParkingLot() {
-    }
+    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
+    private List<Spot> spotList= new ArrayList<>();
+
 }
