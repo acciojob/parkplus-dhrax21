@@ -22,6 +22,11 @@ public class Spot {
     @JoinColumn
     private ParkingLot parkingLot;
 
+    public Spot(int pricePerHour, boolean occupied) {
+        this.pricePerHour = pricePerHour;
+        this.occupied = occupied;
+    }
+
     @OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
     private List<Reservation> reservationList=new ArrayList<>();
 
