@@ -87,4 +87,7 @@ public class Spot {
     public void setParkingLot(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
     }
+
+    public Spot() {
+    }
 }
